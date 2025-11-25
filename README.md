@@ -1,4 +1,4 @@
-# Mastering-AWS-Networking-VPC-VPC-Peering-Transit-Gateway
+<img width="1673" height="246" alt="image" src="https://github.com/user-attachments/assets/b528f629-e369-4aab-9034-63abef3b115e" /># Mastering-AWS-Networking-VPC-VPC-Peering-Transit-Gateway
 # PROBLEM STATEMENT
 You will build a networking solution for a fictional FinTech company named PayWave Systems.
 PayWave recently expanded its operations and separated its workloads into three functional environments:
@@ -15,7 +15,9 @@ The Application VPC must also communicate with Shared Services.
 The company initially wants to explore VPC Peering to understand direct connectivity between environments.
 Later, due to expected growth, they need a scalable, centralized architecture using Transit Gateway, since VPC Peering will create too many peering pairs to manage.
 
-## Step 1 – Core Networking Setup
+## Methode 1 : Ideal for small Organization using VPC Peering:
+
+### Step 1 – Core Networking Setup
 ### a)  Create three VPC with diffrent CIDR Ranges as named VPC-A,VPC-B and VPC-C.
 <img width="1598" height="697" alt="image" src="https://github.com/user-attachments/assets/bc17f6c0-1252-4ad7-a546-abbc3f3d23c8" />
 <img width="1578" height="705" alt="image" src="https://github.com/user-attachments/assets/10767edc-7c21-469e-9d28-dbe5a8efb281" />
@@ -95,9 +97,52 @@ Later, due to expected growth, they need a scalable, centralized architecture us
   <img width="787" height="186" alt="image" src="https://github.com/user-attachments/assets/77fadcf2-6493-4306-92b4-1b58075f2624" />
   <img width="1636" height="542" alt="image" src="https://github.com/user-attachments/assets/ae1d07eb-dc01-4e04-9846-80fbc7a77275" />
 
+## Methode 2 : Ideal for mid to large Organization using Transit Gateway:
 
+### Step 1: Create transit gateway:
+#### Under VPC check for Transit Gateways ,Choose it and click on create transit gateway:
+<img width="1901" height="465" alt="image" src="https://github.com/user-attachments/assets/5a6ac6d3-ec5d-4c14-9f58-a75671aadf50" />
+<img width="1640" height="182" alt="image" src="https://github.com/user-attachments/assets/a64d0703-7b9a-42d0-8117-278bb06828d5" />
 
+### Step 2 : Create transit gateway Attachments for All VPCs using created transit Gateway:
+<img width="1673" height="246" alt="image" src="https://github.com/user-attachments/assets/98797b07-522e-43dd-8d71-a20819b8a53a" />
+
+### Step 3 : Update route table of created transit Gateway:
+#### Choose Transit gateway route tables and select Created transit gateway and goto Association tab.
+<img width="1653" height="697" alt="image" src="https://github.com/user-attachments/assets/d99fae3f-cc29-4b04-b474-1d7afd826ecf" />
+
+### Step 4 : Update route table of VPCs using transit Gateway:
+<img width="1652" height="540" alt="image" src="https://github.com/user-attachments/assets/3c3c4780-1e5a-4ec8-9a7e-a3ea6edbde4b" />
+<img width="1635" height="691" alt="image" src="https://github.com/user-attachments/assets/1f99c27c-8b4f-44a9-bcd0-767627bfab64" />
+<img width="1652" height="378" alt="image" src="https://github.com/user-attachments/assets/5fa74663-8d0b-4f70-abf2-59eaf60a0cbe" />
+
+### Step 5 : Testing using Ping for VPC Networking using VPC Transit gateway:
+#### 1. Check security group for all three active EC2 instances must be enabled **All ICMP - IPv4** on all three instances.
+<img width="787" height="186" alt="image" src="https://github.com/user-attachments/assets/77fadcf2-6493-4306-92b4-1b58075f2624" />
+<img width="1617" height="555" alt="image" src="https://github.com/user-attachments/assets/d87fe5a6-1da0-48bb-880f-8f936ae7b235" />
+<img width="1697" height="547" alt="image" src="https://github.com/user-attachments/assets/98085c7a-1327-46b1-9d6e-a81bbbf48476" />
+
+#### 2. Login to EC2 instance with associated with VPC- A and ping pulic ip for VPC-B & VPC-C EC2 instance.
+<img width="1638" height="350" alt="image" src="https://github.com/user-attachments/assets/c291ba28-763f-4618-90de-5f85d29d2569" />
+<img width="1622" height="331" alt="image" src="https://github.com/user-attachments/assets/572c1e9d-e8fc-458a-9c79-7dccd6f73d80" />
+<img width="1621" height="308" alt="image" src="https://github.com/user-attachments/assets/4f9d685c-802e-479d-af00-a8758f004d93" />
+
+  #### A. Here we are getting response from EC2 instance instance associated with VPC-B.
+  <img width="625" height="437" alt="image" src="https://github.com/user-attachments/assets/7cb2b074-758c-4a5b-8e69-c0cce676a05f" />
   
+  #### B. Here we are tryed to ping EC2 instance instance associated with VPC-C.
+  <img width="661" height="461" alt="image" src="https://github.com/user-attachments/assets/6d29b8f6-8569-4891-8fe2-2cb96ee134c6" />
+
+
+#### 3. We will try one more time to ping VPC-A & VPC-B EC2 instances public IP from VPC-C EC2 instance.
+  #### A. Here we tried to ping with VPC-B & VPC-A from VPC-C and Getting proper response.
+  <img width="676" height="320" alt="image" src="https://github.com/user-attachments/assets/95dd6276-2a02-40a3-9b37-1bc9588b8787" />
+  <img width="653" height="341" alt="image" src="https://github.com/user-attachments/assets/4b69d910-1924-451d-9392-4e7e4b926108" />
+
+
+
+
+
 
   
 
